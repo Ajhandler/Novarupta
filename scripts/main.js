@@ -17,8 +17,16 @@ var App = React.createClass({
       quiz : require('./sample-quiz')
     });
   },
+  addScore : function(){
+  	this.state.score += 25
+  	this.setState({score: this.state.score})
+  },
+  subtractScore : function(){
+  	this.state.score -= 10
+  	this.setState({score : this.state.score})
+  },
   renderQuiz : function(key){
-  	return <Quiz key={key} details={this.state.quiz[key]} />
+  	return <Quiz subtractScore={this.subtractScore}addScore={this.addScore} key={key} details={this.state.quiz[key]} />
   },
 	render : function(){
 		return(
@@ -35,11 +43,10 @@ var App = React.createClass({
 */
 var Quiz = React.createClass({
 	renderQuestions : function(key){
-		return <Questions key={key} details={this.props.details.answers[key]} />
+		return <Questions {...this.props} key={key} details={this.props.details.answers[key]} />
 	},
 	render : function(){
 		var details = this.props.details;
-		console.log(details.question)
 		return(
 			<li>
 				<h2>{details.question}</h2>
@@ -53,10 +60,17 @@ var Quiz = React.createClass({
   <Questions />
 */
 var Questions = React.createClass({
+	calcScore : function(){
+		if (this.props.details.correct === true){
+			this.props.addScore()
+		} else {
+			this.props.subtractScore()
+		}
+	},
 	render : function(){
 		var details = this.props.details; 
 		return(
-			<button>{details.text}</button>
+			<button onClick={this.calcScore}>{details.text}</button>
 		)
 	}
 });
