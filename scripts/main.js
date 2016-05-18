@@ -61,6 +61,11 @@ var Quiz = React.createClass({
   <Questions />
 */
 var Questions = React.createClass({
+	getInitialState : function(){
+		return {
+			disabled : false
+		}
+	},
 	calcScore : function(){
 		if (this.props.details.correct === true){
 			this.props.addScore()
@@ -68,10 +73,13 @@ var Questions = React.createClass({
 			this.props.subtractScore()
 		}
 	},
+	disable : function(){
+		this.setState({disabled : true})
+	},
 	render : function(){
 		var details = this.props.details; 
 		return(
-			<button onClick={this.calcScore}>{details.text}</button>
+			<button disabled={this.state.disabled} onClick={this.disable} onClick={this.calcScore}>{details.text}</button>
 		)
 	}
 });
