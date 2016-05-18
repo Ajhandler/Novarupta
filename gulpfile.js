@@ -28,7 +28,7 @@ gulp.task('styles',function() {
 
   // Compiles CSS
   gulp.src('css/style.scss')
-    .pipe(sass())
+    .pipe(sass({outputStyle: 'compressed'}))
     .pipe(autoprefixer())
     .pipe(gulp.dest('./build/css/'))
     .pipe(reload({stream:true}))
