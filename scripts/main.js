@@ -44,7 +44,7 @@ var App = React.createClass({
 */
 var Quiz = React.createClass({
 	renderQuestions : function(key){
-		return <Questions {...this.props} key={key} details={this.props.details.answers[key]} />
+		return <Answer {...this.props} key={key} details={this.props.details.answers[key]} />
 	},
 	render : function(){
 		var details = this.props.details;
@@ -57,10 +57,10 @@ var Quiz = React.createClass({
 	}
 });
 
-/* Questions
-  <Questions />
+/* Answer
+  <Answer />
 */
-var Questions = React.createClass({
+var Answer = React.createClass({
 	getInitialState : function(){
 		return {
 			disabled : false
