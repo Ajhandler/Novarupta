@@ -26,7 +26,7 @@ var App = React.createClass({
   	this.setState({score : this.state.score})
   },
   renderQuiz : function(key){
-  	return <Quiz subtractScore={this.subtractScore}addScore={this.addScore} key={key} details={this.state.quiz[key]} />
+  	return <Quiz subtractScore={this.subtractScore} addScore={this.addScore} key={key} details={this.state.quiz[key]} />
   },
 	render : function(){
 		return(
@@ -74,12 +74,18 @@ var Questions = React.createClass({
 		}
 	},
 	disable : function(){
-		this.setState({disabled : true})
+		this.setState({
+			disabled :true
+		});
+	},
+	handleClick : function(){
+		this.calcScore();
+		this.disable();
 	},
 	render : function(){
 		var details = this.props.details; 
 		return(
-			<button disabled={this.state.disabled} onClick={this.disable} onClick={this.calcScore}>{details.text}</button>
+			<button disabled={this.state.disabled} onClick={this.handleClick}>{details.text}</button>
 		)
 	}
 });
