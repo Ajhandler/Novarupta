@@ -34,16 +34,30 @@ var App = React.createClass({
   <Quiz />
 */
 var Quiz = React.createClass({
+	renderQuestions : function(key){
+		return <Questions key={key} details={this.props.details.answers[key]} />
+	},
 	render : function(){
 		var details = this.props.details;
 		console.log(details.question)
 		return(
 			<li>
 				<h2>{details.question}</h2>
-				<button></button>
+				{Object.keys(this.props.details.answers).map(this.renderQuestions)}
 			</li>
 		)
 	}
 });
 
+/* Questions
+  <Questions />
+*/
+var Questions = React.createClass({
+	render : function(){
+		var details = this.props.details; 
+		return(
+			<button>{details.text}</button>
+		)
+	}
+});
 ReactDOM.render(<App />, document.querySelector("#main"));
