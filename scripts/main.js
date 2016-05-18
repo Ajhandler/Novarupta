@@ -33,6 +33,7 @@ var App = React.createClass({
 			<div>
 				<h1>Quiz</h1>
 				{Object.keys(this.state.quiz).map(this.renderQuiz)}
+					<Score score={this.state.score} />
 			</div>
 		)
 	},
@@ -74,4 +75,21 @@ var Questions = React.createClass({
 		)
 	}
 });
+
+/* Score
+  <Score />
+*/
+
+var Score = React.createClass({
+	render : function(){
+		return(
+			<div>
+				<h1>Score:
+				<span>{this.props.score}</span>
+				</h1>
+			</div>
+		)
+	}
+});
+
 ReactDOM.render(<App />, document.querySelector("#main"));
