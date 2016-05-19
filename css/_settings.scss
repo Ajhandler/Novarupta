@@ -1,19 +1,23 @@
 body{
 	padding-top: 70px;
+	overflow-x: hidden;
 }
 .questions{
+		text-align: center;
+		padding: 0;
 	.question{
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-start;
 		list-style-type: none;
+		text-align:center;
 	}
 }
 .answer{
-	list-style-type: none;
+	border: 3px solid #333;
+	border-radius: 5px;
+	padding: 10px;
+	background: #fff;
+	margin: 2% auto;
+	width: 70%;
 }
 .answer{
 		display: block;
-		text-align: center;
 }

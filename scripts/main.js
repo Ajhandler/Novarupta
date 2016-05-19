@@ -64,12 +64,16 @@ var Quiz = React.createClass({
 	render : function(){
 		var details = this.props.details;
 		return(
-				<li className="question">
+				<div className="row">
+				<li className="question col-md-8 col-md-offset-2">
 					<h2>{details.question}</h2>
-					<div className="answers">
-						{Object.keys(this.props.details.answers).map(this.renderAnswers)}
+					<div className="row">
+						<div className="answers col-md-12">
+							{Object.keys(this.props.details.answers).map(this.renderAnswers)}
+						</div>
 					</div>
 				</li>
+				</div>
 		)
 	}
 });
