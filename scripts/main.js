@@ -126,7 +126,6 @@ var Answer = React.createClass({
 /* Score
   <Score />
 */
-
 var Score = React.createClass({
 	render : function(){
 		return(
