@@ -1,6 +1,6 @@
 module.exports = {
 	question1 : {
-		question : "Which of the following should I report in T&amp;T?",
+		question : "Which of the following should I report in T&T?",
 		answers : [
 			{text: "529 plan purchased by my parents for the benefit of my child.",
 			correct: false
@@ -17,7 +17,7 @@ module.exports = {
 		]
 	},
 	question2 : {
-		question : "Within how many days of acquisition should any new financial interest be reported in T&amp;T?:",
+		question : "Within how many days of acquisition should any new financial interest be reported in T&T?:",
 		answers : [
 			{text: "45",
 			correct: false
@@ -68,7 +68,7 @@ question4 : {
 		]
 	},
 	question5 : {
-		question : "Which of the following loans are reportable in T&amp;T?:",
+		question : "Which of the following loans are reportable in T&T?:",
 		answers : [
 			{text: "Primary Mortgage",
 			correct: false

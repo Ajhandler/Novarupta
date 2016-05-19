@@ -1,7 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-
 /* App
   <App />
 */
@@ -9,13 +8,15 @@ var App = React.createClass({
 	getInitialState : function(){
 		return	{
 			quiz : {},
-			score : 0
+			score : 0,
+			currentQuestion: 0
 		}
 	},
 	componentDidMount : function(){
 		this.setState({
       quiz : require('./sample-quiz')
     });
+
   },
   addScore : function(){
   	this.state.score += 25
@@ -25,15 +26,26 @@ var App = React.createClass({
   	this.state.score -= 10
   	this.setState({score : this.state.score})
   },
+  currentQuestion : function(){
+  	var key = Object.keys(this.state.quiz)[this.state.currentQuestion]
+  	return  console.log(this.state.quiz[key])
+
+  },
+  nextQuestion : function(){
+  	this.setState({
+  		currentQuestion : this.state.question + 1
+  	})
+  },
   renderQuiz : function(key){
   	return <Quiz subtractScore={this.subtractScore} addScore={this.addScore} key={key} details={this.state.quiz[key]} />
   },
 	render : function(){
+		var questions = this.state.currentQuestion
 		return(
 			<div>
 				<Header score={this.state.score} />
 				<div className="container">
-				<ul className="questions">
+				<ul onClick={this.currentQuestion} className="questions">
 					{Object.keys(this.state.quiz).map(this.renderQuiz)}
 				</ul>
 				</div>
