@@ -1,0 +1,19 @@
+body{
+	padding-top: 70px;
+}
+.questions{
+	.question{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		list-style-type: none;
+	}
+}
+.answer{
+	list-style-type: none;
+}
+.answer{
+		display: block;
+		text-align: center;
+}

@@ -31,28 +31,45 @@ var App = React.createClass({
 	render : function(){
 		return(
 			<div>
-				<h1>Quiz</h1>
-				{Object.keys(this.state.quiz).map(this.renderQuiz)}
-					<Score score={this.state.score} />
+				<Header score={this.state.score} />
+				<div className="container">
+				<ul className="questions">
+					{Object.keys(this.state.quiz).map(this.renderQuiz)}
+				</ul>
+				</div>
 			</div>
 		)
 	},
+});
+
+var Header = React.createClass({
+	render : function(){
+		return (
+			<nav className="navbar navbar-dark bg-inverse navbar-fixed-top">
+				<h3 className="navbar-brand">
+					<Score score={this.props.score}/>
+				</h3>
+			</nav>
+		)
+	}
 });
 
 /* Quiz
   <Quiz />
 */
 var Quiz = React.createClass({
-	renderQuestions : function(key){
+	renderAnswers : function(key){
 		return <Answer {...this.props} key={key} details={this.props.details.answers[key]} />
 	},
 	render : function(){
 		var details = this.props.details;
 		return(
-			<li>
-				<h2>{details.question}</h2>
-				{Object.keys(this.props.details.answers).map(this.renderQuestions)}
-			</li>
+				<li className="question">
+					<h2>{details.question}</h2>
+					<div className="answers">
+						{Object.keys(this.props.details.answers).map(this.renderAnswers)}
+					</div>
+				</li>
 		)
 	}
 });
@@ -85,7 +102,7 @@ var Answer = React.createClass({
 	render : function(){
 		var details = this.props.details; 
 		return(
-			<button disabled={this.state.disabled} onClick={this.handleClick}>{details.text}</button>
+				<button className="answer" disabled={this.state.disabled} onClick={this.handleClick}>{details.text}</button>
 		)
 	}
 });
@@ -97,11 +114,9 @@ var Answer = React.createClass({
 var Score = React.createClass({
 	render : function(){
 		return(
-			<div>
-				<h1>Score:
-				<span>{this.props.score}</span>
-				</h1>
-			</div>
+				<div>Score:
+				  <span> {this.props.score}</span>
+				</div>
 		)
 	}
 });
