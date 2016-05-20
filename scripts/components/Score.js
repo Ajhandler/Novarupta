@@ -4,14 +4,14 @@
 
 import React from 'react'
 
-var Score = React.createClass({
-	render : function(){
+class Score extends React.Component{
+	render (){
 		return(
 				<div>Score:
 				  <span>{this.props.score}</span>
 				</div>
 		)
 	}
-});
+}
 
 export default Score

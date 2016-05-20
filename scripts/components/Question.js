@@ -3,12 +3,15 @@
 */
 import React from 'react'
 import Answer from './Answer'
+import autobind from 'autobind-decorator'
 
-var Question = React.createClass({
-	renderAnswers : function(key){
+
+@autobind
+class Question extends React.Component{
+	renderAnswers(key){
 		return <Answer {...this.props} key={key} details={this.props.details.answers[key]} />
-	},
-	render : function(){
+	}
+	render(){
 		var details = this.props.details;
 		return(
 				<div className="row">
@@ -23,6 +26,6 @@ var Question = React.createClass({
 				</div>
 		)
 	}
-});
+};
 
 export default Question

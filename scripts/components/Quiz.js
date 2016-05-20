@@ -7,43 +7,45 @@ import Header from './Header'
 import Question from './Question'
 import Next from './Next'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
+import autobind from 'autobind-decorator'
 
-
-var Quiz = React.createClass({
-	getInitialState : function(){
-		return	{
+@autobind
+class Quiz extends React.Component{
+	constructor(){
+		super();
+		this.state =	{
 			quiz : {},
 			score : 0,
 			currentQuestion: 0
 		}
-	},
-	componentWillMount : function(){
+	}
+	componentWillMount(){
 		this.setState({
       quiz : require('../sample-quiz')
     });
-  },
-  addScore : function(){
+  }
+  addScore(){
   	this.state.score += 25
   	this.setState({score: this.state.score})
-  },
-  subtractScore : function(){
+  }
+  subtractScore(){
   	this.state.score -= 10
   	this.setState({score : this.state.score})
-  },
-  currentQuestion : function(){
+  }
+  currentQuestion(){
   	var key = Object.keys(this.state.quiz)[this.state.currentQuestion]
   	return key
 
-  },
-  nextQuestion : function(){
+  }
+  nextQuestion(){
   	this.setState({
   		currentQuestion : this.state.currentQuestion + 1
   	})
-  },
-  renderQuiz : function(key){
+  }
+  renderQuiz(key){
   	return <Question subtractScore={this.subtractScore} addScore={this.addScore} key={key} details={this.state.quiz[key]} />
-  },
-	render : function(){
+  }
+	render(){
 		var questions = this.state.currentQuestion
 		return(
 			<div>
@@ -62,7 +64,7 @@ var Quiz = React.createClass({
 				</div>
 			</div>
 		)
-	},
-});
+	}
+};
 
 export default 	Quiz

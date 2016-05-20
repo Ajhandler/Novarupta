@@ -2,12 +2,13 @@
   <Next />
 */
 import React from 'react'
-var Next = React.createClass({
-	render : function(){
+
+class Next extends React.Component{
+	render(){
 		return(
 			<button className="next" onClick={this.props.nextQuestion}>Next</button>
 		)
 	}
-});
+}
 
 export default Next

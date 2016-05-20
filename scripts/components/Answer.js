@@ -2,15 +2,17 @@
   <Answer />
 */
 import React from 'react'
+import autobind from 'autobind-decorator'
 
-
-var Answer = React.createClass({
-	getInitialState : function(){
-		return {
+@autobind
+class Answer extends React.Component{
+	constructor(){
+		super();
+		this.state = {
 			disabled : false
 		}
-	},
-	calcScore : function(){
+	}
+	calcScore(){
 		if (this.props.details.correct === true){
 			this.props.addScore()
 			this.playCorrectSound()
@@ -18,25 +20,25 @@ var Answer = React.createClass({
 			this.props.subtractScore()
 			this.playIncorrectSound()
 		}
-	},
-	disable : function(){
+	}
+	disable (){
 		this.setState({
 			disabled :true
 		});
-	},
-	playCorrectSound : function(){
+	}
+	playCorrectSound(){
 		var sound = new Audio('../sounds/correct.wav');
 		sound.play();
-	},
-	playIncorrectSound : function(){
+	}
+	playIncorrectSound(){
 		var sound = new Audio('../sounds/wrong.wav');
 		sound.play();
-	},
-	handleClick : function(){
+	}
+	handleClick(){
 		this.calcScore();
 		this.disable();
-	},
-	render : function(){
+	}
+	render(){
 		var details = this.props.details;
 		var btnClass = 'answer'
 		if(this.state.disabled && details.correct) btnClass += ' correct'
@@ -45,6 +47,6 @@ var Answer = React.createClass({
 				<button className={btnClass} disabled={this.state.disabled} onClick={this.handleClick}>{details.text}</button>
 		)
 	}
-});
+};
 
 export default Answer
