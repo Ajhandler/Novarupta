@@ -33,11 +33,11 @@ var App = React.createClass({
   },
   nextQuestion : function(){
   	this.setState({
-  		currentQuestion : this.state.question + 1
-  	})
+  		currentQuestion : this.state.currentQuestion + 1
+  	});
   },
   renderQuiz : function(key){
-  	return <Quiz subtractScore={this.subtractScore} addScore={this.addScore} key={key} details={this.state.quiz[key]} />
+  	return <Question subtractScore={this.subtractScore} addScore={this.addScore} key={key} details={this.state.quiz[key]} />
   },
 	render : function(){
 		var questions = this.state.currentQuestion
@@ -47,6 +47,7 @@ var App = React.createClass({
 				<div className="container">
 				<ul className="questions">
 					{this.renderQuiz(this.currentQuestion())}
+					<Next nextQuestion={this.nextQuestion} />
 				</ul>
 				</div>
 			</div>
@@ -57,7 +58,6 @@ var App = React.createClass({
 /* Header
   <Header />
 */
-
 var Header = React.createClass({
 	render : function(){
 		return (
@@ -73,7 +73,7 @@ var Header = React.createClass({
 /* Quiz
   <Quiz />
 */
-var Quiz = React.createClass({
+var Question = React.createClass({
 	renderAnswers : function(key){
 		return <Answer {...this.props} key={key} details={this.props.details.answers[key]} />
 	},
@@ -106,10 +106,8 @@ var Answer = React.createClass({
 	calcScore : function(){
 		if (this.props.details.correct === true){
 			this.props.addScore()
-			document.dispatchEvent(new CustomEvent("correct"));
 		} else {
 			this.props.subtractScore()
-			document.dispatchEvent(new CustomEvent("incorrect"));
 		}
 	},
 	disable : function(){
@@ -132,7 +130,6 @@ var Answer = React.createClass({
 /* Score
   <Score />
 */
-
 var Score = React.createClass({
 	render : function(){
 		return(
@@ -142,6 +139,18 @@ var Score = React.createClass({
 		)
 	}
 });
+
+/* Next
+  <Next />
+*/
+var Next = React.createClass({
+	render : function(){
+		return(
+			<button className="next" onClick={this.props.nextQuestion}>Next</button>
+		)
+	}
+})
+
 
 
 ReactDOM.render(<App />, document.querySelector("#main"));
