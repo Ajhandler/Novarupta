@@ -2,6 +2,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var classNames = require('classnames');
 
+var CSSTransitionGroup = require('react-addons-css-transition-group');
+
 
 /* App
   <App />
@@ -46,10 +48,16 @@ var App = React.createClass({
 			<div>
 				<Header score={this.state.score} />
 				<div className="container">
-				<ul className="questions">
+				<CSSTransitionGroup 
+				className="questions" 
+				component="ul"
+				transitionName="question"
+				transitionEnterTimeout={1500}
+				transitionLeaveTimeout={1500}
+				>
 					{this.renderQuiz(this.currentQuestion())}
 					<Next nextQuestion={this.nextQuestion} />
-				</ul>
+				</CSSTransitionGroup>
 				</div>
 			</div>
 		)

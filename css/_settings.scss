@@ -65,3 +65,17 @@ body{
     -webkit-animation-name: shake; 
     animation-name: shake; 
 }
+.question-enter{
+	transform: translateY(-120%);
+	transition: 1.5s;
+	&.question-enter-active{
+		transform: translateY(0);
+	}
+}
+.question-leave{
+	transition: all 1.5s;
+	transform: translateY(0);
+	&.question-leave-active{
+		transform: translateY(120%);
+	}
+}
