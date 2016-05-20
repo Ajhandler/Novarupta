@@ -10,11 +10,14 @@ body{
 		text-align:center;
 	}
 }
+.next,
 .answer{
 	border: 3px solid #333;
 	border-radius: 5px;
 	padding: 10px;
 	background: #fff;
+}
+.answer{
 	margin: 2% auto;
 	width: 70%;
 }

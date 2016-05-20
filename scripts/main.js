@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+
 /* App
   <App />
 */
@@ -12,11 +13,10 @@ var App = React.createClass({
 			currentQuestion: 0
 		}
 	},
-	componentDidMount : function(){
+	componentWillMount : function(){
 		this.setState({
       quiz : require('./sample-quiz')
     });
-
   },
   addScore : function(){
   	this.state.score += 25
@@ -28,16 +28,16 @@ var App = React.createClass({
   },
   currentQuestion : function(){
   	var key = Object.keys(this.state.quiz)[this.state.currentQuestion]
-  	return  console.log(this.state.quiz[key])
+  	return key
 
   },
   nextQuestion : function(){
   	this.setState({
-  		currentQuestion : this.state.question + 1
-  	})
+  		currentQuestion : this.state.currentQuestion + 1
+  	});
   },
   renderQuiz : function(key){
-  	return <Quiz subtractScore={this.subtractScore} addScore={this.addScore} key={key} details={this.state.quiz[key]} />
+  	return <Question subtractScore={this.subtractScore} addScore={this.addScore} key={key} details={this.state.quiz[key]} />
   },
 	render : function(){
 		var questions = this.state.currentQuestion
@@ -45,8 +45,9 @@ var App = React.createClass({
 			<div>
 				<Header score={this.state.score} />
 				<div className="container">
-				<ul onClick={this.currentQuestion} className="questions">
-					{Object.keys(this.state.quiz).map(this.renderQuiz)}
+				<ul className="questions">
+					{this.renderQuiz(this.currentQuestion())}
+					<Next nextQuestion={this.nextQuestion} />
 				</ul>
 				</div>
 			</div>
@@ -54,6 +55,9 @@ var App = React.createClass({
 	},
 });
 
+/* Header
+  <Header />
+*/
 var Header = React.createClass({
 	render : function(){
 		return (
@@ -69,7 +73,7 @@ var Header = React.createClass({
 /* Quiz
   <Quiz />
 */
-var Quiz = React.createClass({
+var Question = React.createClass({
 	renderAnswers : function(key){
 		return <Answer {...this.props} key={key} details={this.props.details.answers[key]} />
 	},
@@ -130,10 +134,23 @@ var Score = React.createClass({
 	render : function(){
 		return(
 				<div>Score:
-				  <span> {this.props.score}</span>
+				  <span>{this.props.score}</span>
 				</div>
 		)
 	}
 });
+
+/* Next
+  <Next />
+*/
+var Next = React.createClass({
+	render : function(){
+		return(
+			<button className="next" onClick={this.props.nextQuestion}>Next</button>
+		)
+	}
+})
+
+
 
 ReactDOM.render(<App />, document.querySelector("#main"));
