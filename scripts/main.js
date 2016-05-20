@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+
 /* App
   <App />
 */
@@ -12,11 +13,10 @@ var App = React.createClass({
 			currentQuestion: 0
 		}
 	},
-	componentDidMount : function(){
+	componentWillMount : function(){
 		this.setState({
       quiz : require('./sample-quiz')
     });
-
   },
   addScore : function(){
   	this.state.score += 25
@@ -28,7 +28,7 @@ var App = React.createClass({
   },
   currentQuestion : function(){
   	var key = Object.keys(this.state.quiz)[this.state.currentQuestion]
-  	return  console.log(this.state.quiz[key])
+  	return key
 
   },
   nextQuestion : function(){
@@ -45,14 +45,18 @@ var App = React.createClass({
 			<div>
 				<Header score={this.state.score} />
 				<div className="container">
-				<ul onClick={this.currentQuestion} className="questions">
-					{Object.keys(this.state.quiz).map(this.renderQuiz)}
+				<ul className="questions">
+					{this.renderQuiz(this.currentQuestion())}
 				</ul>
 				</div>
 			</div>
 		)
 	},
 });
+
+/* Header
+  <Header />
+*/
 
 var Header = React.createClass({
 	render : function(){
@@ -102,8 +106,10 @@ var Answer = React.createClass({
 	calcScore : function(){
 		if (this.props.details.correct === true){
 			this.props.addScore()
+			document.dispatchEvent(new CustomEvent("correct"));
 		} else {
 			this.props.subtractScore()
+			document.dispatchEvent(new CustomEvent("incorrect"));
 		}
 	},
 	disable : function(){
@@ -131,10 +137,11 @@ var Score = React.createClass({
 	render : function(){
 		return(
 				<div>Score:
-				  <span> {this.props.score}</span>
+				  <span>{this.props.score}</span>
 				</div>
 		)
 	}
 });
+
 
 ReactDOM.render(<App />, document.querySelector("#main"));
