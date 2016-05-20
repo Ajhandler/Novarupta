@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var classNames = require('classnames');
 
 
 /* App
@@ -131,9 +132,12 @@ var Answer = React.createClass({
 		this.disable();
 	},
 	render : function(){
-		var details = this.props.details; 
+		var details = this.props.details;
+		var btnClass = 'answer'
+		if(this.state.disabled && details.correct) btnClass += ' correct'
+		else if(this.state.disabled && details.correct == false) btnClass += ' false animated shake' 
 		return(
-				<button className="answer" disabled={this.state.disabled} onClick={this.handleClick}>{details.text}</button>
+				<button className={btnClass} disabled={this.state.disabled} onClick={this.handleClick}>{details.text}</button>
 		)
 	}
 });

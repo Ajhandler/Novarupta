@@ -46,6 +46,7 @@
   },
   "homepage": "https://github.com/ajhandler/novarupta#readme",
   "dependencies": {
+    "classnames": "^2.2.5",
     "howler": "^1.1.29",
     "jquery": "^2.2.3",
     "react-sound": "^0.4.0"
