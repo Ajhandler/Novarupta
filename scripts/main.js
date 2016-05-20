@@ -34,10 +34,10 @@ var App = React.createClass({
   nextQuestion : function(){
   	this.setState({
   		currentQuestion : this.state.currentQuestion + 1
-  	});
+  	})
   },
   renderQuiz : function(key){
-  	return <Question subtractScore={this.subtractScore} addScore={this.addScore} key={key} details={this.state.quiz[key]} />
+  	return <Quiz subtractScore={this.subtractScore} addScore={this.addScore} key={key} details={this.state.quiz[key]} />
   },
 	render : function(){
 		var questions = this.state.currentQuestion
@@ -58,6 +58,7 @@ var App = React.createClass({
 /* Header
   <Header />
 */
+
 var Header = React.createClass({
 	render : function(){
 		return (
@@ -73,7 +74,7 @@ var Header = React.createClass({
 /* Quiz
   <Quiz />
 */
-var Question = React.createClass({
+var Quiz = React.createClass({
 	renderAnswers : function(key){
 		return <Answer {...this.props} key={key} details={this.props.details.answers[key]} />
 	},
@@ -106,14 +107,24 @@ var Answer = React.createClass({
 	calcScore : function(){
 		if (this.props.details.correct === true){
 			this.props.addScore()
+			this.playCorrectSound()
 		} else {
 			this.props.subtractScore()
+			this.playIncorrectSound()
 		}
 	},
 	disable : function(){
 		this.setState({
 			disabled :true
 		});
+	},
+	playCorrectSound : function(){
+		var sound = new Audio('../sounds/correct.wav');
+		sound.play();
+	},
+	playIncorrectSound : function(){
+		var sound = new Audio('../sounds/wrong.wav');
+		sound.play();
 	},
 	handleClick : function(){
 		this.calcScore();

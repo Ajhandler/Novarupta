@@ -1,6 +1,17 @@
+// Color Vars
+$grey: #f3f3f3;
+$blue: #002776;
+$light-blue: #72C7E7;
+$green: #92D400;
+$light-green: #C9DD03;
+
+
 body{
 	padding-top: 70px;
 	overflow-x: hidden;
+}
+.navbar-light{
+	color: #fff;
 }
 .questions{
 		text-align: center;
