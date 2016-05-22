@@ -6,6 +6,7 @@ import React from 'react'
 import Header from './Header'
 import Question from './Question'
 import Next from './Next'
+import ResultButton from './ResultButton'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import autobind from 'autobind-decorator'
 
@@ -47,6 +48,14 @@ class Quiz extends React.Component{
   }
 	render(){
 		var questions = this.state.currentQuestion
+		var showButton;
+		// check the length of the array. subtract one to get correct index
+		//then see if it equals the current question
+		if (Object.keys(this.state.quiz).length - 1 == this.state.currentQuestion){
+			showButton = <ResultButton/>	
+		} else {
+			showButton = <Next nextQuestion={this.nextQuestion}/>
+		}
 		return(
 			<div>
 				<Header score={this.state.score} />
@@ -59,7 +68,7 @@ class Quiz extends React.Component{
 				transitionLeaveTimeout={1500}
 				>
 					{this.renderQuiz(this.currentQuestion())}
-					<Next nextQuestion={this.nextQuestion} />
+					{showButton}
 				</CSSTransitionGroup>
 				</div>
 			</div>
