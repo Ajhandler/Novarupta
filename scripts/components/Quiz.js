@@ -50,7 +50,7 @@ class Quiz extends React.Component{
 		var questions = this.state.currentQuestion
 		var showButton;
 		// check the length of the array. subtract one to get correct index
-		//then see if it equals the current question
+		//then see if it equals the current question if it does, show result button
 		if (Object.keys(this.state.quiz).length - 1 == this.state.currentQuestion){
 			showButton = <ResultButton/>	
 		} else {

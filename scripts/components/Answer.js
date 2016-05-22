@@ -41,10 +41,14 @@ class Answer extends React.Component{
 	render(){
 		var details = this.props.details;
 		var btnClass = 'answer'
+		var opts = {}
+		if (this.state.disabled){
+			opts['disabled'] = 'disabled';
+		}
 		if(this.state.disabled && details.correct) btnClass += ' correct'
 		else if(this.state.disabled && details.correct == false) btnClass += ' false animated shake' 
 		return(
-				<button className={btnClass} disabled={this.state.disabled} onClick={this.handleClick}>{details.text}</button>
+				<button className={btnClass} {...opts} onClick={this.handleClick}>{details.text}</button>
 		)
 	}
 };
